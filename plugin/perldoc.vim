@@ -1,3 +1,9 @@
+"
+" ~/.vim/ftplugin/perl/init.vim
+" ---
+" noremap K :Perldoc<CR>
+" ---
+"
 
 if exists("g:loaded_perldoc")
   finish
@@ -39,7 +45,7 @@ function! s:PerldocView()
 
   call s:SetKeyMaps()
 
-  au BufHidden <buffer> call let s:PerldocBufNo = -1
+  au BufHidden <buffer> call let <SID>buf_nr = -1
 endfunction
 
 function! s:SetKeyMaps()
