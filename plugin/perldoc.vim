@@ -120,5 +120,29 @@ function! s:Perldoc(...)
   call s:PerldocWord(word)
 endfunction
 
-command! -nargs=* -complete=file Perldoc :call s:Perldoc(<q-args>)
+let s:perlpath = ''
+function! s:PerldocComplete(ArgLead, CmdLine, CursorPos)
+  if len(s:perlpath) == 0
+    try
+  	if &shellxquote != '"'
+        let s:perlpath = system('perl -e "print join(q/,/,@INC)"')
+      else
+        let s:perlpath = system("perl -e 'print join(q/,/,@INC)'")
+      endif
+    catch /E145:/
+  	let s:perlpath = ".,,"
+    endtry
+  endif
+  let ret = {}
+  for p in split(s:perlpath, ',')
+    for i in split(globpath(p, substitute(a:ArgLead, '::', '/', 'g').'*'), "\n")
+      if isdirectory(i) | let i .= '/' | endif
+      let i = substitute(substitute(i[len(p)+1:], '[\\/]', '::', 'g'), '\.pm$', '', 'g')
+      let ret[i] = i
+    endfor
+  endfor
+  return keys(ret)
+endfunction
+
+command! -nargs=* -complete=customlist,s:PerldocComplete Perldoc :call s:Perldoc(<q-args>)
 "command! -nargs=* -bang -complete=customlist,s:RefeComplete Refe :call s:RefeExec(<bang>0,<f-args>)
