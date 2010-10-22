@@ -20,7 +20,7 @@ function! s:PerldocView()
 
   if !bufexists(s:buf_nr)
     leftabove new
-    file \[Perldoc]
+    file `="[Perldoc]"`
     let s:buf_nr = bufnr('%')
   elseif bufwinnr(s:buf_nr) == -1
     leftabove split
@@ -124,13 +124,13 @@ let s:perlpath = ''
 function! s:PerldocComplete(ArgLead, CmdLine, CursorPos)
   if len(s:perlpath) == 0
     try
-  	if &shellxquote != '"'
+      if &shellxquote != '"'
         let s:perlpath = system('perl -e "print join(q/,/,@INC)"')
       else
         let s:perlpath = system("perl -e 'print join(q/,/,@INC)'")
       endif
     catch /E145:/
-  	let s:perlpath = ".,,"
+      let s:perlpath = ".,,"
     endtry
   endif
   let ret = {}
