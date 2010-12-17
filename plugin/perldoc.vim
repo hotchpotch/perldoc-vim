@@ -145,4 +145,3 @@ function! s:PerldocComplete(ArgLead, CmdLine, CursorPos)
 endfunction
 
 command! -nargs=* -complete=customlist,s:PerldocComplete Perldoc :call s:Perldoc(<q-args>)
-"command! -nargs=* -bang -complete=customlist,s:RefeComplete Refe :call s:RefeExec(<bang>0,<f-args>)
