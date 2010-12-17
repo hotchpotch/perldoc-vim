@@ -136,7 +136,11 @@ function! s:PerldocComplete(ArgLead, CmdLine, CursorPos)
   let ret = {}
   for p in split(s:perlpath, ',')
     for i in split(globpath(p, substitute(a:ArgLead, '::', '/', 'g').'*'), "\n")
-      if isdirectory(i) | let i .= '/' | endif
+      if isdirectory(i)
+          let i .= '/'
+      elseif i !~ '\.pm$'
+          continue
+      endif
       let i = substitute(substitute(i[len(p)+1:], '[\\/]', '::', 'g'), '\.pm$', '', 'g')
       let ret[i] = i
     endfor
