@@ -141,7 +141,7 @@ function! s:PerldocComplete(ArgLead, CmdLine, CursorPos)
       let ret[i] = i
     endfor
   endfor
-  return keys(ret)
+  return sort(keys(ret))
 endfunction
 
 command! -nargs=* -complete=customlist,s:PerldocComplete Perldoc :call s:Perldoc(<q-args>)
