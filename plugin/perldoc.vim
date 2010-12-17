@@ -86,7 +86,7 @@ function! s:Toggle()
 endfunction
 
 function! s:ShowCmd(cmd)
-  call s:PerldocView()
+  silent call s:PerldocView()
   setlocal modifiable
   normal ggdG
   silent execute a:cmd
