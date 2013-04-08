@@ -118,11 +118,7 @@ function! s:FuncExist(word)
 endfunction
 
 function! s:VarsExist(word)
-  if has('win32') || has('win64')
-    silent call system('perldoc -otext -v ' . a:word)
-  else
-    silent call system('perldoc -otext -v ''' . a:word . '''')
-  endif
+  silent call system('perldoc -otext -v ' . shellescape(a:word))
   if v:shell_error
     return 0
   else
@@ -142,11 +138,7 @@ let s:perlpath = ''
 function! s:PerldocComplete(ArgLead, CmdLine, CursorPos)
   if len(s:perlpath) == 0
     try
-      if &shellxquote != '"'
-        let s:perlpath = system('perl -e "print join(q/,/,@INC)"')
-      else
-        let s:perlpath = system("perl -e 'print join(q/,/,@INC)'")
-      endif
+      let s:perlpath = system('perl -e ' . shellescape("print join(q/,/,@INC)"))
     catch /E145:/
       let s:perlpath = ".,,"
     endtry
