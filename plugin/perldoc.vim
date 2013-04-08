@@ -131,6 +131,7 @@ function! s:Perldoc(...)
   if !strlen(word)
     let word = expand('<cword>')
   endif
+  let word = substitute(word, '^\(.*[^:]\)::$', '\1', '')
   call s:PerldocWord(word)
 endfunction
 
