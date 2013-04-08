@@ -20,3 +20,12 @@ Possible to complete names with `<tab>`
 :Perldoc -v $$
 ```
 
+## Keymap
+
+You can add key map to open Perldoc like follow. 
+
+~/.vim/ftplugin/perl.vim
+
+```
+noremap K :Perldoc<CR>
+```
