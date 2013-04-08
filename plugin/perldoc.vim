@@ -1,10 +1,3 @@
-"
-" ~/.vim/ftplugin/perl/init.vim
-" ---
-" noremap K :Perldoc<CR>
-" ---
-"
-
 if exists("g:loaded_perldoc")
   finish
 endif
