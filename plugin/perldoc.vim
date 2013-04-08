@@ -64,6 +64,11 @@ function! s:PerldocWord(word)
     let s:last_word = a:word
     call s:ShowCmd('0read!perldoc -otext -f ' . a:word)
     setfiletype man
+  elseif s:VarsExist(a:word)
+    let s:mode = ''
+    let s:last_word = a:word
+    call s:ShowCmd('0read!perldoc -otext -v ' . a:word)
+    setfiletype man
   else
     echo 'No documentation found for "' . a:word . '".'
   end
@@ -105,6 +110,19 @@ endfunction
 
 function! s:FuncExist(word)
   silent call system('perldoc -otext -f ' . a:word)
+  if v:shell_error
+    return 0
+  else
+    return 1
+  endif
+endfunction
+
+function! s:VarsExist(word)
+  if has('win32') || has('win64')
+    silent call system('perldoc -otext -v ' . a:word)
+  else
+    silent call system('perldoc -otext -v ''' . a:word . '''')
+  endif
   if v:shell_error
     return 0
   else
