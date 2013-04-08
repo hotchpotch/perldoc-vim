@@ -22,10 +22,4 @@ Possible to complete names with `<tab>`
 
 ## Keymap
 
-You can add key map to open Perldoc like follow. 
-
-~/.vim/ftplugin/perl.vim
-
-```
-noremap <buffer> K :Perldoc<CR>
-```
+Type K to open Perldoc on the keywords.
