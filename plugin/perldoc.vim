@@ -11,12 +11,13 @@ function! s:PerldocView()
   " base on FuzzyFinder WindowManager
   let cwd = getcwd()
 
+  let split_modifier = get(g:, 'perldoc_split_modifier', '')
   if !bufexists(s:buf_nr)
-    leftabove new
+    exe 'leftabove ' . split_modifier . 'new'
     file `="[Perldoc]"`
     let s:buf_nr = bufnr('%')
   elseif bufwinnr(s:buf_nr) == -1
-    leftabove split
+    exe 'leftabove ' . split_modifier . 'split'
     execute s:buf_nr . 'buffer'
     delete _
   elseif bufwinnr(s:buf_nr) != bufwinnr('%')
