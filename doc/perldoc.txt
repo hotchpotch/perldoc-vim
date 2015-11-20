@@ -9,6 +9,7 @@ interface to perldoc. you can get perldoc with integrated operation for vim.
 CONTENTS                                                      *perldoc-contents*
 
 Usage                        |perldoc-usage|
+Configuration                |perldoc-configuration|
 KeyMap                       |perldoc-keymap|
 
 ==============================================================================
@@ -25,6 +26,14 @@ You are possible to specify argument: >
 <
 This can complete module names with <tab> key.
 
+==============================================================================
+CONFIGURATION                                            *perldoc-configuration*
+
+g:perldoc_split_modifier                              *g:perldoc_split_modifier*
+			Set this variable to specify modifier of new/split
+			method like below. >
+                            let g:perldoc_split_modifier = '10v'
+<
 ==============================================================================
 KEYMAP                                                          *perldoc-keymap*
 

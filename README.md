@@ -20,6 +20,14 @@ Possible to complete names with `<tab>`
 :Perldoc -v $$
 ```
 
+## Configuration
+
+Set `g:perldoc_split_modifier` to specify modifier of new/split method like below.
+
+```vim
+let g:perldoc_split_modifier = '10v'
+```
+
 ## Keymap
 
 Type K to open Perldoc on the keywords.
